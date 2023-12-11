@@ -1,0 +1,32 @@
+html
+head
+body
+
+  link(rel="stylesheet" type="text/css" href="/style.css")
+  div(class="bar")
+    a(class="btn" href="http://localhost:8080/") DeForest Hotel
+    a(class="btn" href="http://localhost:8080/") Найти номер
+    a(class="btn" href="http://localhost:8080/") Назад
+
+  table(class="table")
+        thead
+            tr
+              th Номер
+              th Тип
+              th Статус
+        tbody
+          each value in data
+              tr
+                td= value.apt_num
+                td= value.typ_name
+                td
+                  - if(value.apt_status === 0)
+                   |Свободен
+                  - else if (value.apt_status === 1)
+                   |Забронирован
+                  - else if (value.apt_status === 2)
+                   |Занят
+                  - else if (value.apt_status === 3)
+                   |Не доступен
+                  - else 
+                   |Ошибка

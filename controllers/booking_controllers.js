@@ -1,0 +1,35 @@
+const db = require('../db')
+
+class controller {
+
+    async getBookings(req, res) {
+        try {
+            const select = await db.query('SELECT * FROM booking order by bkg_num');
+            const data = select.rows;
+            res.render('../pages/booking_page', { data });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            res.status(500).send('Error fetching data');
+        }
+    }
+
+    async addBooking(req, res) {
+        try {
+            const result = await db.query('CALL public.create_booking($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [req.body.surname, req.body.name, req.body.patronimus, req.body.pasport, req.body.phone, req.body.sex, req.body.date_brth, req.body.apt_num, req.body.date_in, req.body.date_out, req.body.price, req.body.pay_type]);
+            //res.status(200).send('Record added successfully');
+            console.log(`Record added successfully`)
+            res.redirect('/booking')
+        } catch (error) {
+            console.error('Error adding record:', error);
+            res.status(500).send('Error adding record');
+        }
+    }
+
+    async findBooking(req, res) {
+        const select = await db.query('SELECT * FROM booking WHERE bkg_num = $1', [req.body.bkg_num])
+        const data = select.rows;
+        res.render('../pages/booking_page', { data });
+    }
+}
+
+module.exports = new controller()

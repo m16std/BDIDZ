@@ -1,0 +1,81 @@
+html
+head
+body
+
+  link(rel="stylesheet" type="text/css" href="/style.css")
+
+  .modal(id="SearchModal" class="SearchModalClass")
+      .modal-content
+        span.close2 &times;
+        h2 Поиск заказа
+        form(id='form2' action="/cleening/find" method="post")
+          br
+          input(type='number', name='bkg_num', placeholder='Номер заказа')
+          br
+          input(class="btn_white" type='submit', name='submit', placeholder='Найти') 
+
+
+  div(class="bar")
+    a(class="btn" href="http://localhost:8080/") DeForest Hotel
+    a(class="btn" href="http://localhost:8080/") Добавить уборку
+    a(class="btn" id="openSearchModal") Найти уборки
+    a(class="btn" href="http://localhost:8080/") Назад
+    script.    
+      const openModalBtn2 = document.getElementById('openSearchModal');
+      const modal2 = document.getElementById('SearchModal');
+      const closeModalSpan2 = document.querySelector('.close2');
+
+      openModalBtn2.addEventListener('click', () => {
+        modal2.style.display = 'block';
+      });
+
+      closeModalSpan2.addEventListener('click', () => {
+        modal2.style.display = 'none';
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target === modal2) {
+          modal2.style.display = 'none';
+        }
+      });
+
+
+
+  table(class="table")
+        thead
+            tr
+              th Номер уборки
+              th Номер заказа
+              th Тип уборки
+              th Фамилия
+              th Имя
+              th Отчество
+              th Паспорт
+              th Дата уборки
+              th Статус
+        tbody
+          each value in data
+              tr
+                td= value.cln_id
+                td= value.bkg_num
+                td
+                 - if(value.cln_type === 1)
+                   |Обычная
+                 - else if (value.cln_type === 2)
+                   |Особая
+                 - else 
+                   | 
+                td= value.stf_surname
+                td= value.stf_name
+                td= value.stf_patronimus
+                td= value.stf_pasport
+                td= value.cln_date.toLocaleDateString()
+                td
+                 - if(value.cln_status === 0)
+                   |Отменена
+                 - else if (value.cln_status === 1)
+                   |Создана
+                 - else if (value.cln_status === 2)
+                   |Выполена
+                 - else 
+                   | 

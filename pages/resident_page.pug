@@ -1,0 +1,39 @@
+html
+head
+body
+
+  link(rel="stylesheet" type="text/css" href="/style.css")
+  div(class="bar")
+    a(class="btn" href="http://localhost:8080/") DeForest Hotel
+    a(class="btn" href="http://localhost:8080/") Добавить постояльца
+    a(class="btn" href="http://localhost:8080/") Найти постояльца
+    a(class="btn" href="http://localhost:8080/") Назад
+
+  table(class="table")
+        thead
+            tr
+              th Фамилия
+              th Имя
+              th Отчество
+              th Паспорт
+              th Номер телефона
+              th Пол
+              th Дата рождения
+              th Особенности
+        tbody
+          each value in data
+              tr
+                td= value.rsd_surname
+                td= value.rsd_name
+                td= value.rsd_patronimus
+                td= value.rsd_pasport
+                td= value.rsd_phone
+                td
+                 - if(value.rsd_sex === 1)
+                   |Мужчина
+                 - else if (value.rsd_sex === 2)
+                   |Женщина
+                 - else 
+                   |Ошибка
+                td= value.rsd_dt_brth.toLocaleDateString()
+                td= value.rsd_pecul

@@ -1,0 +1,166 @@
+html
+head
+  body
+    link(rel="stylesheet" type="text/css" href="/style.css")
+    .modal(id="myModal" class="myModalClass")
+      .modal-content
+        span.close &times;
+        h2 Добавление заказа
+        form(id='form' action="/booking/add" method="post")
+          h3 Постоялец
+          input(type='text', name='surname', placeholder='Фамилия')
+          br
+          input(type='text', name='name', placeholder='Имя')
+          br
+          input(type='text', name='patronimus', placeholder='Отчество')
+          br
+          input(type='number', name='pasport', placeholder='Паспорт')
+          br
+          input(type='number', name='phone', placeholder='Номер телефона')
+          br
+          div(class="form_radio")
+            input(id="radio-1" type="radio" name="sex" value="1" checked) 
+            label(for="radio-1" Radio) Мужчина
+          div(class="form_radio")
+            input(id="radio-2" type="radio" name="sex" value="2") 
+            label(for="radio-2" Radio) Женщина
+          input(type="text" onfocus="(this.type='date')" onblur="(this.type='text')", name='date_brth', placeholder='Дата рождения')
+          br
+          h3 Апартамент
+          input(type='number', name='apt_num', placeholder='Номер')
+          br
+          input(type="text" onfocus="(this.type='date')" onblur="(this.type='text')", name='date_in', placeholder='Дата заселения')
+          br
+          input(type="text" onfocus="(this.type='date')" onblur="(this.type='text')", name='date_out', placeholder='Дата выселения')
+          br
+          h3 Оплата
+          input(type='number', name='price', placeholder='Стоимость')
+          br
+          div(class="form_radio")
+            input(id="radio-3" type="radio" name="pay_type" value="1" checked) 
+            label(for="radio-3" Radio) Карта
+          div(class="form_radio")
+            input(id="radio-4" type="radio" name="pay_type" value="2") 
+            label(for="radio-4" Radio) Наличные
+          input(class="btn_white" type='submit', name='submit', placeholder='Добавить') 
+    .modal(id="SearchModal" class="SearchModalClass")
+      .modal-content
+        span.close2 &times;
+        h2 Поиск заказа
+        form(id='form2' action="/bkg_full/find" method="post")
+          br
+          input(type='number', name='bkg_num', placeholder='Номер заказа')
+          br
+          input(class="btn_white" type='submit', name='submit', placeholder='Найти') 
+
+  div(class="bar")
+    a(class="btn" href="http://localhost:8080/") DeForest Hotel
+    a(id="openModal" class="btn") Добавить заказ
+    a(class="btn" id="openSearchModal") Найти заказ
+    script.
+      const openModalBtn = document.getElementById('openModal');
+      const modal = document.getElementById('myModal');
+      const closeModalSpan = document.querySelector('.close');
+
+      // Открываем модальное окно при клике на кнопку
+      openModalBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+      });
+
+      // Закрываем модальное окно при клике на кнопку закрытия
+      closeModalSpan.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      // Закрываем модальное окно при клике за его пределами
+      window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+      const openModalBtn2 = document.getElementById('openSearchModal');
+      const modal2 = document.getElementById('SearchModal');
+      const closeModalSpan2 = document.querySelector('.close2');
+
+      openModalBtn2.addEventListener('click', () => {
+        modal2.style.display = 'block';
+      });
+
+      closeModalSpan2.addEventListener('click', () => {
+        modal2.style.display = 'none';
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target === modal2) {
+          modal2.style.display = 'none';
+        }
+      });
+    a(class="btn" href="http://localhost:8080/") Назад
+    
+      
+  table(class="table")
+        thead
+            tr
+              th Номер
+              th Апартамент
+              th Статус
+              th Дата заселения
+              th Дата выселения
+              th Стоимость
+              th Способ оплаты
+              th Комментарий
+              th Фамилия 
+              th Имя
+              th Отчество
+              th Паспорт
+              th Номер телефона
+              th Пол
+              th Дата рождения
+              th Особенности
+        tbody
+          each value in data
+              tr
+                td= value.bkg_num
+                td= value.apt_num
+                td
+                  - if(value.bkg_status === 3)
+                   |Завершен
+                  - else if (value.bkg_status === 2)
+                   |Активный
+                  - else if (value.bkg_status === 1)
+                   |Создан
+                  - else if (value.bkg_status === 0)
+                   |Отменен
+                  - else 
+                   |Ошибка
+                td= value.bkg_date_in.toLocaleDateString()
+                td= value.bkg_date_out.toLocaleDateString()
+                td= value.bkg_full_price
+                td
+                 - if(value.bkg_pay_type === 1)
+                   |Наличные
+                 - else if (value.bkg_pay_type === 2)
+                   |Карта
+                 - else 
+                   | 
+                td= value.bkg_comm
+
+                td= value.rsd_surname
+                td= value.rsd_name
+                td= value.rsd_patronimus
+                td= value.rsd_pasport
+                td= value.rsd_phone
+                td
+                 - if(value.rsd_sex === 1)
+                   |Мужчина
+                 - else if (value.rsd_sex === 2)
+                   |Женщина
+                 - else 
+                   | 
+                td
+                 - if(value.rsd_dt_brth === null)
+                   | 
+                 - else 
+                   |value.rsd_dt_brth.toLocaleDateString()
+                td= value.rsd_pecul
+
