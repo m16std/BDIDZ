@@ -14,5 +14,7 @@ router.use(
 router.use(express.urlencoded({ extended: true }))
 router.get('/', controller.getFullBkg);
 router.post('/find', controller.findFullBkg);
+router.post('/findCheck', controller.findFullBkgCheck);
+
 
 module.exports = router;

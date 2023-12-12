@@ -1,0 +1,101 @@
+html
+head
+body
+
+  link(rel="stylesheet" type="text/css" href="/style.css")
+  div(class="bar") 
+    a(class="btn" href="http://localhost:8080/") DeForest Hotel
+    a(class="btn" onclick="history.back()") Назад
+
+  div(class="div_check")
+    p(class="text_check") Кассовый чек №#{data[0].bkg_num}
+    p(class="text_check") #{Date()}
+    p(class="text_check") https://www.deforesthotel.ru/
+    p(class="text_check") Интернет Решения, ООО
+    p(class="text_check") ИНН 7704217370
+    p(class="text_check") Вид налогообложения: ОСН
+    p(class="text_check") Заказ
+    hr(align="center" size="2" color="#aaa" left="0px" right="0px")
+    table(class="table_check")
+        thead
+            tr
+              th Номер
+              th Апартамент
+              th Статус
+              th Дата заселения
+              th Дата выселения
+              th Стоимость
+              th Способ оплаты
+              th Комментарий
+        tbody
+          each value in data
+              tr
+                td= value.bkg_num
+                td= value.apt_num
+                td
+                  - if(value.bkg_status === 3)
+                   |Завершен
+                  - else if (value.bkg_status === 2)
+                   |Активный
+                  - else if (value.bkg_status === 1)
+                   |Создан
+                  - else if (value.bkg_status === 0)
+                   |Отменен
+                  - else 
+                   |Ошибка
+                td= value.bkg_date_in.toLocaleDateString()
+                td= value.bkg_date_out.toLocaleDateString()
+                td= value.full_price
+                td
+                 - if(value.bkg_pay_type === 1)
+                   |Наличные
+                 - else if (value.bkg_pay_type === 2)
+                   |Карта
+                 - else 
+                   |Ошибка
+                td= value.bkg_comm
+    br
+    p(class="text_check") Заказчик
+    hr(align="center" size="2" color="#aaa" left="0px" right="0px")
+    table(class="table_check")
+        thead
+            tr
+              th Фамилия 
+              th Имя
+              th Отчество
+              th Паспорт
+              th Номер телефона
+              th Пол
+              th Дата рождения
+        tbody
+          each value in data
+              tr
+                td= value.rsd_surname
+                td= value.rsd_name
+                td= value.rsd_patronimus
+                td= value.rsd_pasport
+                td= value.rsd_phone
+                td
+                 - if(value.rsd_sex === 1)
+                   |Мужчина
+                 - else if (value.rsd_sex === 2)
+                   |Женщина
+                 - else 
+                   | 
+                td
+                 - if(value.rsd_dt_brth === null)
+                   | 
+                 - else 
+                   =value.rsd_dt_brth.toLocaleDateString()
+    hr(align="center" size="2" color="#aaa" left="0px" right="0px")
+    h2(class="text_check") ИТОГ = #{data[0].full_price}
+    p(class="text_check") Без НДС = #{data[0].full_price}
+    p(class="text_check") Полный расчет
+    p(class="text_check") Зачет предварительной оплаты = #{data[0].full_price}
+    hr(align="center" size="2" color="#aaa" left="0px" right="0px")
+    p(class="text_check") ФН: 7281440701316590
+    p(class="text_check") РН ККТ: 0006820554021965
+    p(class="text_check") ФД: 230604
+    p(class="text_check") ФПД: 2821881210
+    p(class="text_check") Сайт ФНС: www.nalog.ru
+

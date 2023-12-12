@@ -1,8 +1,9 @@
 const Router = require('express');
 const apartrouter = new Router();
-const apartcontroller = require('../controllers/cln_controllers');
+const apartcontroller = require('../controllers/apartament_controllers');
 
-apartrouter.get('/', apartcontroller.getCleening);
-apartrouter.get('/:id', apartcontroller.getOneCleening);
+apartrouter.get('/', apartcontroller.getApartaments);
+apartrouter.post('/find', apartcontroller.findApartaments);
+apartrouter.get('/:id', apartcontroller.getOneApartament);
 
 module.exports = apartrouter;

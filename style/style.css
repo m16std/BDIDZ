@@ -115,6 +115,48 @@
     font-size: 24px;
 }
 
+.home_text {
+    text-align: right;
+    opacity: 0.5;
+    margin: 0px;
+    padding: 0px;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 140px;
+}
+
+.text_check {
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    color: #111;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+.div_check {
+    position: absolute;
+    right: 25%;
+    left: 25%;
+    top: 100px;
+    color: #111;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+}
+
+.table_check {
+    width: 100%;
+    right: 0px;
+    left: 0px;
+    padding: 10px;
+    color: #111;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    text-align: left;
+}
+
 .btn {
     display: inline-block;
     box-sizing: border-box;
@@ -178,6 +220,19 @@
     color: #53e040;
 }
 
+.EditModalClass {
+    display: none;
+    /* Скрываем модальное окно по умолчанию */
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Затемненный фон вокруг модального окна */
+}
 
 .myModalClass {
     display: none;
@@ -207,12 +262,26 @@
     /* Затемненный фон вокруг модального окна */
 }
 
+.SearchModalClass2 {
+    display: none;
+    /* Скрываем модальное окно по умолчанию */
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Затемненный фон вокруг модального окна */
+}
+
 .modal-content {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fefefe;
     margin: 25%;
     width: 50%;
-    margin-top: 100px;
+    margin-top: 50px;
     padding: 20px;
     border: 1px solid #888;
     border-radius: 10px;
@@ -220,6 +289,27 @@
 }
 
 .close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close1 {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close2 {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close3 {
     float: right;
     font-size: 28px;
     font-weight: bold;

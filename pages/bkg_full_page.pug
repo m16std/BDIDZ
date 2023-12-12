@@ -45,9 +45,18 @@ head
           input(class="btn_white" type='submit', name='submit', placeholder='Добавить') 
     .modal(id="SearchModal" class="SearchModalClass")
       .modal-content
-        span.close2 &times;
+        span.close1 &times;
         h2 Поиск заказа
-        form(id='form2' action="/bkg_full/find" method="post")
+        form(id='form1' action="/bkg_full/find" method="post")
+          br
+          input(type='number', name='bkg_num', placeholder='Номер заказа')
+          br
+          input(class="btn_white" type='submit', name='submit', placeholder='Найти') 
+    .modal(id="SearchModal2" class="SearchModalClass2")
+      .modal-content
+        span.close2 &times;
+        h2 Открыть чек для заказа
+        form(id='form2' action="/bkg_full/findCheck" method="post")
           br
           input(type='number', name='bkg_num', placeholder='Номер заказа')
           br
@@ -57,6 +66,8 @@ head
     a(class="btn" href="http://localhost:8080/") DeForest Hotel
     a(id="openModal" class="btn") Добавить заказ
     a(class="btn" id="openSearchModal") Найти заказ
+    a(class="btn" id="openSearchModal2") Открыть чек
+    a(class="btn" onclick="history.back()") Назад
     script.
       const openModalBtn = document.getElementById('openModal');
       const modal = document.getElementById('myModal');
@@ -78,8 +89,25 @@ head
           modal.style.display = 'none';
         }
       });
-      const openModalBtn2 = document.getElementById('openSearchModal');
-      const modal2 = document.getElementById('SearchModal');
+      const openModalBtn1 = document.getElementById('openSearchModal');
+      const modal1 = document.getElementById('SearchModal');
+      const closeModalSpan1 = document.querySelector('.close1');
+
+      openModalBtn1.addEventListener('click', () => {
+        modal1.style.display = 'block';
+      });
+
+      closeModalSpan1.addEventListener('click', () => {
+        modal1.style.display = 'none';
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target === modal1) {
+          modal1.style.display = 'none';
+        }
+      });
+      const openModalBtn2 = document.getElementById('openSearchModal2');
+      const modal2 = document.getElementById('SearchModal2');
       const closeModalSpan2 = document.querySelector('.close2');
 
       openModalBtn2.addEventListener('click', () => {
@@ -95,7 +123,6 @@ head
           modal2.style.display = 'none';
         }
       });
-    a(class="btn" href="http://localhost:8080/") Назад
     
       
   table(class="table")
@@ -161,6 +188,6 @@ head
                  - if(value.rsd_dt_brth === null)
                    | 
                  - else 
-                   |value.rsd_dt_brth.toLocaleDateString()
+                   =value.rsd_dt_brth.toLocaleDateString()
                 td= value.rsd_pecul
 

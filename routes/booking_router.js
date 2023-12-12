@@ -15,5 +15,6 @@ router.use(express.urlencoded({ extended: true }))
 router.get('/', controller.getBookings);
 router.post('/find', controller.findBooking);
 router.post('/add', controller.addBooking);
+router.post('/edit', controller.editBooking);
 
 module.exports = router;

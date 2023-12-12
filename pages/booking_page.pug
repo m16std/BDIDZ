@@ -52,12 +52,56 @@ head
           input(type='number', name='bkg_num', placeholder='Номер заказа')
           br
           input(class="btn_white" type='submit', name='submit', placeholder='Найти')
-          
+    .modal(id="EditModal" class="EditModalClass")
+      .modal-content
+        span.close3 &times;
+        h2 Параметры заказа
+        form(id='form3' action="/booking/edit" method="post")
+          input(type='number', name='bkg_num', placeholder='Номер заказа')
+          br
+          h3 Постоялец
+          input(type='text', name='surname', placeholder='Фамилия')
+          br
+          input(type='text', name='name', placeholder='Имя')
+          br
+          input(type='text', name='patronimus', placeholder='Отчество')
+          br
+          input(type='number', name='pasport', placeholder='Паспорт')
+          br
+          input(type='number', name='phone', placeholder='Номер телефона')
+          br
+          div(class="form_radio")
+            input(id="radio-1" type="radio" name="sex" value="1" checked) 
+            label(for="radio-1" Radio) Мужчина
+          div(class="form_radio")
+            input(id="radio-2" type="radio" name="sex" value="2") 
+            label(for="radio-2" Radio) Женщина
+          input(type="text" onfocus="(this.type='date')" onblur="(this.type='text')", name='date_brth', placeholder='Дата рождения')
+          br
+          h3 Апартамент
+          input(type='number', name='apt_num', placeholder='Номер')
+          br
+          input(type="text" onfocus="(this.type='date')" onblur="(this.type='text')", name='date_in', placeholder='Дата заселения')
+          br
+          input(type="text" onfocus="(this.type='date')" onblur="(this.type='text')", name='date_out', placeholder='Дата выселения')
+          br
+          h3 Оплата
+          input(type='number', name='price', placeholder='Стоимость')
+          br
+          div(class="form_radio")
+            input(id="radio-3" type="radio" name="pay_type" value="1" checked) 
+            label(for="radio-3" Radio) Карта
+          div(class="form_radio")
+            input(id="radio-4" type="radio" name="pay_type" value="2") 
+            label(for="radio-4" Radio) Наличные
+          input(class="btn_white" type='submit', name='submit', placeholder='Добавить') 
 
   div(class="bar")
     a(class="btn" href="http://localhost:8080/") DeForest Hotel
     a(id="openModal" class="btn") Добавить заказ
     a(class="btn" id="openSearchModal") Найти заказ
+    a(class="btn" id="openEditModal") Изменить заказ
+    a(class="btn" onclick="history.back()") Назад
     script.
       const openModalBtn = document.getElementById('openModal');
       const modal = document.getElementById('myModal');
@@ -96,7 +140,23 @@ head
           modal2.style.display = 'none';
         }
       });
-    a(class="btn" href="http://localhost:8080/") Назад
+      const openModalBtn3 = document.getElementById('openEditModal');
+      const modal3 = document.getElementById('EditModal');
+      const closeModalSpan3 = document.querySelector('.close3');
+
+      openModalBtn3.addEventListener('click', () => {
+        modal3.style.display = 'block';
+      });
+
+      closeModalSpan3.addEventListener('click', () => {
+        modal3.style.display = 'none';
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target === modal3) {
+          modal3.style.display = 'none';
+        }
+      });
     
       
   table(class="table")
