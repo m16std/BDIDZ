@@ -21,7 +21,7 @@ class controller {
     }
 
     async findCleening(req, res) {
-        const select = await db.query('SELECT * FROM cleening natural join staff WHERE cln_date > $1', [req.body.date])
+        const select = await db.query('SELECT * FROM cleening natural join staff WHERE cln_date >= $1', [req.body.date])
         const data = select.rows;
         res.render('../pages/cln_page', { data });
     }

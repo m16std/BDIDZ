@@ -4,7 +4,7 @@ class controller {
 
     async getBookings(req, res) {
         try {
-            const select = await db.query('SELECT * FROM booking order by bkg_num');
+            const select = await db.query('SELECT *, bkg_full_price::numeric as full_price  FROM booking order by bkg_num');
             const data = select.rows;
             res.render('../pages/booking_page', { data });
         } catch (error) {
